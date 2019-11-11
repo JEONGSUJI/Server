@@ -25,8 +25,10 @@ const ajax = (() => {
   const req = (method, url, f, payload) => {
     const xhr = new XMLHttpRequest();
       xhr.open(method, url);
+      // 절대경로 xhr.open('GET', 'http://localhost:3000/todos');
       xhr.setRequestHeader('content-type', 'application/json');
       xhr.send(JSON.stringify(payload));
+      // onreadystatechange는 이벤트라 비동기함수
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
         if (xhr.status === 200) {
@@ -149,6 +151,7 @@ const ajax = (() => {
 
 const getTodos = () => {
   // get('/todos', render);
+    // render(); 를 쓸 수 없는 이유는 비동기 함수라 순서 보장이 안되기 때문이다.
   ajax.get('/todos', render);
   // todos = get('/todos');
   // render();
