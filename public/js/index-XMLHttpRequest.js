@@ -151,7 +151,7 @@ const ajax = (() => {
 
 const getTodos = () => {
   // get('/todos', render);
-    // render(); 를 쓸 수 없는 이유는 비동기 함수라 순서 보장이 안되기 때문이다.
+  // render(); 를 쓸 수 없는 이유는 비동기 함수라 순서 보장이 안되기 때문이다.
   ajax.get('/todos', render);
   // todos = get('/todos');
   // render();
@@ -168,7 +168,7 @@ $input.onkeyup = ({target,keyCode}) =>{
   if( !content || keyCode !== 13) return;
   target.value = '';
   // post('/todos', { id: generateId(), content, completed: false}, render);
-  ajax.post('/todos', render, { id: generateId(), content, completed: false});
+  ajax.post('/todos', { id: generateId(), content, completed: false}, render);
 }
 
 $todos.onchange = ({target}) => {
@@ -177,7 +177,7 @@ $todos.onchange = ({target}) => {
   // todo.id === + id 하는 요소를 반환함, 배열을 반환하는게 아님 여러개면 첫번째만 반환
   const completed = !todos.find(todo => todo.id === + id).completed;
   // patch(`/todos/${id}`, {completed}, render);
-  ajax.patch(`/todos/${id}`, render, {completed});
+  ajax.patch(`/todos/${id}`, {completed}, render);
 };
 
 $todos.onclick = ({target}) => {
